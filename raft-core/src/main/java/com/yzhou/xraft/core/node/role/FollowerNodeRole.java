@@ -2,10 +2,13 @@ package com.yzhou.xraft.core.node.role;
 
 import com.yzhou.xraft.core.schedule.ElectionTimeout;
 
+import javax.annotation.concurrent.Immutable;
+
 /**
  * @author yzhou
  * @date 2022/6/14
  */
+@Immutable
 public class FollowerNodeRole extends AbstractNodeRole {
     private final NodeId votedFor; // 投过票的节点，有可能为空
     private final NodeId leaderId; // 当前leader节点ID，有可能为空
