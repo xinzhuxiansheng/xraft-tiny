@@ -12110,7 +12110,7 @@ public final class Protos {
       "int\022\026\n\016node_to_remove\030\002 \001(\t\"[\n\016SnapshotH" +
       "eader\022\022\n\nlast_index\030\001 \001(\005\022\021\n\tlast_term\030\002" +
       " \001(\005\022\"\n\013last_config\030\003 \003(\0132\r.NodeEndpoint" +
-      "B\037\n\025in.xnnyygn.xraft.coreB\006Protosb\006proto" +
+      "B\037\n\025com.yzhou.xraft.coreB\006Protosb\006proto" +
       "3"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =

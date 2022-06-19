@@ -5,7 +5,7 @@ package com.yzhou.xraft.core.node;
  *
  * @see ReplicatingState
  */
-class GroupMember {
+public class GroupMember {
 
     private final NodeEndpoint endpoint;
     private ReplicatingState replicatingState;
