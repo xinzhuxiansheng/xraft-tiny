@@ -1,18 +1,23 @@
 package com.yzhou.xraft.core.node.role;
 
+import com.yzhou.xraft.core.node.NodeId;
+import com.yzhou.xraft.core.schedule.LogReplicationTask;
+
 import javax.annotation.concurrent.Immutable;
 
-/**
- * @author yzhou
- * @date 2022/6/15
- */
 @Immutable
-public class LeaderNodeRole extends AbstractNodeRole{
-    private final LogReplicationTask logReplicationTask; //日志复制定时器
+public class LeaderNodeRole extends AbstractNodeRole {
+
+    private final LogReplicationTask logReplicationTask;
 
     public LeaderNodeRole(int term, LogReplicationTask logReplicationTask) {
         super(RoleName.LEADER, term);
         this.logReplicationTask = logReplicationTask;
+    }
+
+    @Override
+    public NodeId getLeaderId(NodeId selfId) {
+        return selfId;
     }
 
     @Override
@@ -21,10 +26,17 @@ public class LeaderNodeRole extends AbstractNodeRole{
     }
 
     @Override
+    public RoleState getState() {
+        return new DefaultRoleState(RoleName.LEADER, term);
+    }
+
+    @Override
+    protected boolean doStateEquals(AbstractNodeRole role) {
+        return true;
+    }
+
+    @Override
     public String toString() {
-        return "LeaderNodeRole{" +
-                "term=" + term +
-                ", logReplicationTask=" + logReplicationTask +
-                '}';
+        return "LeaderNodeRole{term=" + term + ", logReplicationTask=" + logReplicationTask + '}';
     }
 }

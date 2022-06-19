@@ -1,28 +1,42 @@
 package com.yzhou.xraft.core.node.role;
 
-/**
- * @author yzhou
- * @date 2022/6/14
- */
-abstract class AbstractNodeRole {
+import com.yzhou.xraft.core.node.NodeId;
+
+public abstract class AbstractNodeRole {
+
     private final RoleName name;
     protected final int term;
 
-    public AbstractNodeRole(RoleName name, int term) {
+    AbstractNodeRole(RoleName name, int term) {
         this.name = name;
         this.term = term;
     }
 
-    // 获取当前的角色名
     public RoleName getName() {
         return name;
     }
 
-    // 取消超时或者定时任务
-    public abstract void cancelTimeoutOrTask();
-
-    // 获取当前的term
     public int getTerm() {
         return term;
     }
+
+    public RoleNameAndLeaderId getNameAndLeaderId(NodeId selfId) {
+        return new RoleNameAndLeaderId(name, getLeaderId(selfId));
+    }
+
+    public abstract NodeId getLeaderId(NodeId selfId);
+
+    public abstract void cancelTimeoutOrTask();
+
+    public abstract RoleState getState();
+
+    public boolean stateEquals(AbstractNodeRole that) {
+        if (this.name != that.name || this.term != that.term) {
+            return false;
+        }
+        return doStateEquals(that);
+    }
+
+    protected abstract boolean doStateEquals(AbstractNodeRole role);
+
 }

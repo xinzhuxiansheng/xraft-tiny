@@ -15,4 +15,12 @@
 现在假设节点a等待168ms，节点b等待210ms，节点c等待200ms。由于a的等待时间最短，所以它会最先成为Candidate，并向另外两个节点发起投票请求，希望它们能选举自己为Leader。另外两个节点收到请求后，假设将它们的投票返回给Candidate状态节点a，节点a由于得到了大多数节点的投票，就会从Candidate变为Leader
 
 
-### Term
+### @Nonnull,
+
+
+### 单元测试
+以下是具体准备的内容：
+1. 测试专用定时器组件 NUllScheduler
+2. 测试专用RPC组件 MockConnector
+3. 暴露role的状态数据
+4. 快速构造NodeImpl的 NodeBuilder

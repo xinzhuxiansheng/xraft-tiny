@@ -1,19 +1,16 @@
 package com.yzhou.xraft.core.node.role;
 
+import com.yzhou.xraft.core.node.NodeId;
 import com.yzhou.xraft.core.schedule.ElectionTimeout;
 
 import javax.annotation.concurrent.Immutable;
 
-/**
- * @author yzhou
- * @date 2022/6/15
- */
 @Immutable
 public class CandidateNodeRole extends AbstractNodeRole {
-    private final int votesCount; // 票数
-    private final ElectionTimeout electionTimeout; // 选举超时
 
-    // 构造函数，票数 1
+    private final int votesCount;
+    private final ElectionTimeout electionTimeout;
+
     public CandidateNodeRole(int term, ElectionTimeout electionTimeout) {
         this(term, 1, electionTimeout);
     }
@@ -24,14 +21,31 @@ public class CandidateNodeRole extends AbstractNodeRole {
         this.electionTimeout = electionTimeout;
     }
 
-    // 获取投票数
     public int getVotesCount() {
         return votesCount;
     }
 
     @Override
+    public NodeId getLeaderId(NodeId selfId) {
+        return null;
+    }
+
+    @Override
     public void cancelTimeoutOrTask() {
         electionTimeout.cancel();
+    }
+
+    @Override
+    public RoleState getState() {
+        DefaultRoleState state = new DefaultRoleState(RoleName.CANDIDATE, term);
+        state.setVotesCount(votesCount);
+        return state;
+    }
+
+    @Override
+    protected boolean doStateEquals(AbstractNodeRole role) {
+        CandidateNodeRole that = (CandidateNodeRole) role;
+        return this.votesCount == that.votesCount;
     }
 
     @Override
