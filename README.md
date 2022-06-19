@@ -1,12 +1,12 @@
->参考 https://github.com/yaoliao/xraft
-
 ### Raft 实现
 
-照着 [分布式一致性算法开发实战](https://book.douban.com/subject/35051108/) 这本书敲一遍
+参考书籍 [分布式一致性算法开发实战](https://book.douban.com/subject/35051108/) 
 
-书中原来的实现 [github](https://github.com/xnnyygn/xraft)
+书作者的实现 [github](https://github.com/xnnyygn/xraft)
 
 [raft 论文翻译](https://github.com/maemual/raft-zh_cn)
+
+[raft 算法动画演示](http://thesecretlivesofdata.com/raft/)
 
 
 ### 选举超时
@@ -24,3 +24,6 @@
 2. 测试专用RPC组件 MockConnector
 3. 暴露role的状态数据
 4. 快速构造NodeImpl的 NodeBuilder
+
+
+NodeImplTest.testStartFresh()
