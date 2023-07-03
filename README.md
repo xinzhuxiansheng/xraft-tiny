@@ -1,6 +1,6 @@
 ### Raft 实现
 
-参考书籍 [分布式一致性算法开发实战](https://book.douban.com/subject/35051108/) 
+参考书籍 [《分布式一致性算法开发实战》](https://book.douban.com/subject/35051108/) 
 
 书作者的实现 [github](https://github.com/xnnyygn/xraft)
 
